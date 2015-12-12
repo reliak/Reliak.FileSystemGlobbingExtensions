@@ -1,0 +1,8 @@
+*.lock.json
+*.user
+artifacts/
+.vs/
+.git/
+bin/
+obj/
+tmp/
