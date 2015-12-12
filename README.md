@@ -1,5 +1,5 @@
 # Reliak.FileSystemGlobbingExtensions
-Extends Microsoft.Extensions.FileSystemGlobbing with the functionality to expand braces (e.g. "*.{jpg,png}") and to allow glob excludes to be defined in the glob pattern itself (e.g. "!**/*.exe" to exclude .exe files)
+Extends Microsoft.Extensions.FileSystemGlobbing with the functionality to expand braces (e.g. `*.{jpg,png}`) and to allow glob excludes to be defined in the glob pattern itself (e.g. `!**/*.exe` to exclude .exe files)
 
 ### Installation / NuGet package
 Install via NuGet Packagemanager:
