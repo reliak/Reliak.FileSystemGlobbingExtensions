@@ -5,11 +5,11 @@ using Xunit;
 
 namespace Reliak.FileSystemGlobbingExtensions.Tests
 {
-    public class DefaultGlobMatcherTestFixture : IDisposable
+    public class GlobMatcherTestFixture : IDisposable
     {
         private readonly DisposableFileSystem _filesystem;
 
-        public DefaultGlobMatcherTestFixture()
+        public GlobMatcherTestFixture()
         {
             _filesystem = new DisposableFileSystem();
 
@@ -33,11 +33,11 @@ namespace Reliak.FileSystemGlobbingExtensions.Tests
         }
     }
 
-    public class DefaultGlobMatcherTest : IClassFixture<DefaultGlobMatcherTestFixture>
+    public class GlobMatcherTest : IClassFixture<GlobMatcherTestFixture>
     {
         private readonly string _baseDirectory;
 
-        public DefaultGlobMatcherTest(DefaultGlobMatcherTestFixture fixture)
+        public GlobMatcherTest(GlobMatcherTestFixture fixture)
         {
             _baseDirectory = fixture.FileSystem.RootDirectory;
         }
@@ -45,11 +45,8 @@ namespace Reliak.FileSystemGlobbingExtensions.Tests
         [Fact]
         public void Test_Expansion_And_Exclusion()
         {
-            // Arrange
-            var matcher = new DefaultGlobMatcher();
-
             // Act
-            var matches = matcher.FindMatches(_baseDirectory, @"**/*.{csv,xml}", "!**/{a,bar}.csv").ToArray();
+            var matches = GlobMatcher.FindMatches(_baseDirectory, @"**/*.{csv,xml}", "!**/{a,bar}.csv").ToArray();
 
             // Assert
             Assert.Equal(3, matches.Length);
@@ -61,11 +58,8 @@ namespace Reliak.FileSystemGlobbingExtensions.Tests
         [Fact]
         public void Test_Expansion_Escape()
         {
-            // Arrange
-            var matcher = new DefaultGlobMatcher();
-
             // Act
-            var matches = matcher.FindMatches(_baseDirectory, @"sub/\{someguid\}.cs").ToArray();
+            var matches = GlobMatcher.FindMatches(_baseDirectory, @"sub/\{someguid\}.cs").ToArray();
 
             // Assert
             Assert.Equal(1, matches.Length);
@@ -76,11 +70,10 @@ namespace Reliak.FileSystemGlobbingExtensions.Tests
         public void Test_AbsolutePath()
         {
             // Arrange
-            var matcher = new DefaultGlobMatcher();
             var absoluteFilepath = Path.Combine(_baseDirectory, @"sub\**\*.exe");
 
             // Act
-            var matches = matcher.FindMatches(_baseDirectory, absoluteFilepath).ToArray();
+            var matches = GlobMatcher.FindMatches(_baseDirectory, absoluteFilepath).ToArray();
 
             // Assert
             Assert.Equal(1, matches.Length);

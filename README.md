@@ -9,9 +9,8 @@ PM> Install-Package Reliak.FileSystemGlobbingExtensions
 
 ### Exemplary usage
 ```
-var globMatcher = new DefaultGlobMatcher();
 // include all .jpg and .png files, except for files with the name "404.png"
-var matches = globMatcher.FindMatches(@"c:\someDirectory", "**/*.{jpg,png}", "!**/404.png");
+var matches = GlobMatcher.FindMatches(@"c:\someDirectory", "**/*.{jpg,png}", "!**/404.png");
 // do something with matches
 ```
 

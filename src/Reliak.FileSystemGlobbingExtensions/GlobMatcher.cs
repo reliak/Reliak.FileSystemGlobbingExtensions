@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace Reliak.FileSystemGlobbingExtensions
 {
-    public class DefaultGlobMatcher : IGlobMatcher
+    public class GlobMatcher
     {
         private const string GLOB_EXCLUDE_IDENTIFIER = "!";
 
-        public IEnumerable<FilePatternMatch> FindMatches(string baseDirectory, params string[] globPatterns)
+        public static IEnumerable<FilePatternMatch> FindMatches(string baseDirectory, params string[] globPatterns)
         {
             globPatterns = ExpandGlobPatterns(globPatterns).ToArray();
 
